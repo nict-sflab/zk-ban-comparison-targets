@@ -1,0 +1,24 @@
+[package]
+name = "bench-snarkblock"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+snarkblock = { git = "https://github.com/akakou-fork/snarkblock", branch = "hotfix/hiciap-repo-url", features = ["asm", "parallel", "benchmarking"] }
+
+rayon = "1.5"
+thiserror = "1"
+
+
+[dev-dependencies]
+criterion = { version = "0.3", features = ["html_reports"] }
+
+[profile.release]
+debug = true
+
+[lib]
+bench = false
+
+[[bench]]
+name = "bench"
+harness = false

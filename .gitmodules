@@ -1,0 +1,3 @@
+[submodule "alpaca/circ-alpaca"]
+	path = alpaca/circ-alpaca
+	url = https://github.com/jiwonkimpark/circ-alpaca

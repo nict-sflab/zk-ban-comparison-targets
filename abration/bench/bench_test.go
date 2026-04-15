@@ -1,8 +1,11 @@
 package bench_test
 
 import (
+	"bytes"
 	"fmt"
 	"math/big"
+	"os"
+	"path/filepath"
 	"runtime"
 	"testing"
 
@@ -27,13 +30,14 @@ var benchSecret = zkbanwitness.InitBigInt()
 func BenchmarkClassic(b *testing.B) {
 	fmt.Println("ready...")
 	template, assignment := classicCircuitsForBench(b)
-	ccs, pk := compileBenchCircuit(b, template)
+	dumps := dumpBenchArtifacts(b, template)
 
 	fmt.Println("start...")
 	runtime.GC()
 
 	b.ResetTimer()
 	for range b.N {
+		ccs, pk := loadBenchArtifacts(b, dumps)
 		wit, err := frontend.NewWitness(assignment, zkbansnark.EcCurve.ScalarField())
 		if err != nil {
 			b.Fatal(err)
@@ -47,13 +51,14 @@ func BenchmarkClassic(b *testing.B) {
 func BenchmarkZKBan(b *testing.B) {
 	fmt.Println("ready...")
 	template, assignment := zkbanCircuitsForBench()
-	ccs, pk := compileBenchCircuit(b, template)
+	dumps := dumpBenchArtifacts(b, template)
 
 	fmt.Println("start...")
 	runtime.GC()
 
 	b.ResetTimer()
 	for range b.N {
+		ccs, pk := loadBenchArtifacts(b, dumps)
 		wit, err := frontend.NewWitness(assignment, zkbansnark.EcCurve.ScalarField())
 		if err != nil {
 			b.Fatal(err)
@@ -110,6 +115,74 @@ func zkbanCircuitsForBench() (frontend.Circuit, frontend.Circuit) {
 		RevocationList: witnessAssigned,
 	}
 	return template, assignment
+}
+
+type dumpedBenchArtifacts struct {
+	ccsPath string
+	pkPath  string
+}
+
+func dumpBenchArtifacts(b *testing.B, template frontend.Circuit) dumpedBenchArtifacts {
+	b.Helper()
+
+	ccs, pk := compileBenchCircuit(b, template)
+	dir := b.TempDir()
+
+	ccsPath := filepath.Join(dir, "ccs.bin")
+	ccsFile, err := os.Create(ccsPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+	defer ccsFile.Close()
+
+	if _, err := ccs.WriteTo(ccsFile); err != nil {
+		b.Fatal(err)
+	}
+
+	pkPath := filepath.Join(dir, "pk.dump")
+	pkFile, err := os.Create(pkPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+	defer pkFile.Close()
+
+	if err := pk.WriteDump(pkFile); err != nil {
+		b.Fatal(err)
+	}
+
+	return dumpedBenchArtifacts{
+		ccsPath: ccsPath,
+		pkPath:  pkPath,
+	}
+}
+
+func loadBenchArtifacts(
+	b *testing.B,
+	dumps dumpedBenchArtifacts,
+) (constraint.ConstraintSystem, groth16.ProvingKey) {
+	b.Helper()
+
+	pkBin, err := os.ReadFile(dumps.pkPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	pk := groth16.NewProvingKey(zkbansnark.EcCurve)
+	if err := pk.ReadDump(bytes.NewReader(pkBin)); err != nil {
+		b.Fatal(err)
+	}
+
+	ccsBin, err := os.ReadFile(dumps.ccsPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	ccs := groth16.NewCS(zkbansnark.EcCurve)
+	if _, err := ccs.ReadFrom(bytes.NewReader(ccsBin)); err != nil {
+		b.Fatal(err)
+	}
+
+	return ccs, pk
 }
 
 func compileBenchCircuit(

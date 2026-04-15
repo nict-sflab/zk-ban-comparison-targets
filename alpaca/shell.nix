@@ -4,6 +4,9 @@ pkgs.mkShell {
   shellHook = ''
     ROOT_DIR="$(pwd)"
     CIRC_DIR="$ROOT_DIR/circ-alpaca"
+    cd "$CIRC_DIR"
+    git apply ../circ.patch
+    cd "$ROOT_DIR"
 
     # `alpaca` (git dependency) expects `<checkout>/circ-alpaca/...` at runtime.
     # Cargo checkouts do not include that subdir here, so link our local one.

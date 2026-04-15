@@ -47,16 +47,8 @@ fn full_attestation(c: &mut Criterion) {
 
     let mut proof_sizes: Vec<(bool, usize, usize, usize)> = Vec::new();
 
-    // let tail_chunk_size = 32768;
-    // let num_tail_chunks = 14;
-
-    // let head_chunk_size = 32768;
-    // let num_head_chunks = 254;
-    let tail_chunk_size = 16;
-    let num_tail_chunks = 14;
-
-    let head_chunk_size = 16;
-    let num_head_chunks = 14;
+    let head_chunk_size = 32768;
+    let num_head_chunks = 254;
 
     let num_pubkeys = 1;
 

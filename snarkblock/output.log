@@ -1,0 +1,201 @@
+
+[akama@nixos:~]$ reset
+
+[akama@nixos:~]$ nix-shell -p rustup
+
+[nix-shell:~]$ ls
+Android  bin  Desktop  Documents  Downloads  go  Music  path-oram-benchmark  Pictures  Public  result  Templates  thinclient_drives  tmp  tmp.py  Videos
+
+[nix-shell:~]$ cd ^C
+
+[nix-shell:~]$ xonsh
+akama@nixos ~ @ cd Documents/zk-ban-comparison-targets/
+akama@nixos ~/Documents/zk-ban-comparison-targets main @ reset
+akama@nixos ~/Documents/zk-ban-comparison-targets main @ cd snarkblock/
+akama@nixos ~/Documents/zk-ban-comparison-targets main @ cd snarkblock/
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock main @ ls
+Cargo.lock  Cargo.toml  benches  run_benches.sh  rust-toolchain.toml  src  target
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock main @ reset
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock main @ cargo clean
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock main @ cargo clean
+     Removed 1066 files, 726.6MiB total
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock main @ sh run_benches.sh; alert 'done'
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling autocfg v1.5.0
+   Compiling libc v0.2.185
+   Compiling version_check v0.9.5
+   Compiling cfg-if v1.0.4
+   Compiling crossbeam-utils v0.8.21
+   Compiling zerocopy v0.8.48
+   Compiling syn v1.0.109
+   Compiling typenum v1.19.0
+   Compiling ucd-trie v0.1.7
+   Compiling either v1.15.0
+   Compiling memchr v2.8.0
+   Compiling rayon-core v1.13.0
+   Compiling paste v1.0.15
+   Compiling once_cell v1.21.4
+   Compiling pin-project-lite v0.2.17
+   Compiling subtle v2.6.1
+   Compiling opaque-debug v0.3.1
+   Compiling serde_core v1.0.228
+   Compiling thiserror v1.0.69
+   Compiling zmij v1.0.21
+   Compiling serde v1.0.228
+   Compiling byteorder v1.5.0
+   Compiling keccak v0.1.6
+   Compiling itoa v1.0.18
+   Compiling serde_json v1.0.149
+   Compiling plotters-backend v0.3.7
+   Compiling unicode-width v0.1.14
+   Compiling regex-syntax v0.8.10
+   Compiling same-file v1.0.6
+   Compiling ryu v1.0.23
+   Compiling half v1.8.3
+   Compiling cast v0.3.0
+   Compiling bitflags v1.3.2
+   Compiling walkdir v2.5.0
+   Compiling tracing-core v0.1.36
+   Compiling itertools v0.10.5
+   Compiling textwrap v0.11.0
+   Compiling oorandom v11.1.5
+   Compiling lazy_static v1.5.0
+   Compiling plotters-svg v0.3.7
+   Compiling generic-array v0.14.9
+   Compiling ahash v0.7.8
+   Compiling num-traits v0.2.19
+   Compiling clap v2.34.0
+   Compiling pest v2.8.6
+   Compiling tracing-subscriber v0.2.25
+   Compiling csv-core v0.1.13
+   Compiling crossbeam-epoch v0.9.18
+   Compiling syn v2.0.117
+   Compiling crossbeam-deque v0.8.6
+   Compiling num-integer v0.1.46
+   Compiling plotters v0.3.7
+   Compiling getrandom v0.2.17
+   Compiling atty v0.2.14
+   Compiling digest v0.9.0
+   Compiling crypto-mac v0.8.0
+   Compiling rand_core v0.6.4
+   Compiling blake2 v0.9.2
+   Compiling num-bigint v0.4.6
+   Compiling hashbrown v0.11.2
+   Compiling criterion-plot v0.4.5
+   Compiling regex-automata v0.4.14
+   Compiling semver-parser v0.10.3
+   Compiling rayon v1.12.0
+   Compiling semver v0.11.0
+   Compiling rustc_version v0.3.3
+   Compiling ark-ff v0.3.0
+   Compiling csv v1.4.0
+   Compiling regex v1.12.3
+   Compiling serde_cbor v0.11.2
+   Compiling zeroize_derive v1.4.3
+   Compiling tracing-attributes v0.1.31
+   Compiling thiserror-impl v1.0.69
+   Compiling tinytemplate v1.2.1
+   Compiling serde_derive v1.0.228
+   Compiling ark-serialize-derive v0.3.0
+   Compiling derivative v2.2.0
+   Compiling ark-ff-macros v0.3.0
+   Compiling ark-ff-asm v0.3.0
+   Compiling zeroize v1.8.2
+   Compiling merlin v3.0.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling tracing v0.1.44
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling ark-std v0.3.0
+   Compiling ark-serialize v0.3.0
+   Compiling criterion v0.3.6
+   Compiling ark-ec v0.3.0
+   Compiling ark-relations v0.3.0
+   Compiling ark-poly v0.3.0
+   Compiling ark-snark v0.3.0
+   Compiling ark-r1cs-std v0.3.1
+   Compiling ark-inner-products v0.3.0 (https://github.com/arkworks-rs/ripp?rev=59d59d9#59d59d96)
+   Compiling ark-bn254 v0.3.0
+   Compiling ark-bls12-381 v0.3.0
+   Compiling ark-poly-commit v0.3.0
+   Compiling ark-dh-commitments v0.3.0 (https://github.com/arkworks-rs/ripp?rev=59d59d9#59d59d96)
+   Compiling ark-marlin v0.3.0
+   Compiling ark-nonnative-field v0.3.0
+   Compiling ark-ed-on-bls12-381 v0.3.0
+   Compiling ark-ed-on-bn254 v0.3.0
+   Compiling ark-crypto-primitives v0.3.0
+   Compiling ark-groth16 v0.3.0
+   Compiling ark-ip-proofs v0.3.0 (https://github.com/arkworks-rs/ripp?rev=59d59d9#59d59d96)
+   Compiling arkworks-gadgets v0.3.13 (https://github.com/rozbb/arkworks-gadgets.git?branch=pub-permute#5760d4fe)
+   Compiling hiciap v0.1.0 (https://github.com/rozbb/hiciap#77bd828f)
+   Compiling snarkblock v0.1.0 (https://github.com/akakou-fork/snarkblock?branch=hotfix%2Fhiciap-repo-url#9a7ca87b)
+   Compiling bench-snarkblock v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/snarkblock)
+warning: function `main` is never used
+ --> src/lib.rs:1:4
+  |
+1 | fn main() {
+  |    ^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `bench-snarkblock` (lib) generated 1 warning
+warning: unused import: `snarkblock::ark_serialize::CanonicalSerialize`
+ --> benches/bench.rs:1:5
+  |
+1 | use snarkblock::ark_serialize::CanonicalSerialize;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `fs::File` and `io::Write`
+  --> benches/bench.rs:10:11
+   |
+10 | use std::{fs::File, io::Write};
+   |           ^^^^^^^^  ^^^^^^^^^
+
+warning: variable does not need to be mutable
+  --> benches/bench.rs:48:9
+   |
+48 |     let mut proof_sizes: Vec<(bool, usize, usize, usize)> = Vec::new();
+   |         ----^^^^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `proof_sizes`
+  --> benches/bench.rs:48:9
+   |
+48 |     let mut proof_sizes: Vec<(bool, usize, usize, usize)> = Vec::new();
+   |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_proof_sizes`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `chunk_proof` is never used
+  --> benches/bench.rs:15:4
+   |
+15 | fn chunk_proof(c: &mut Criterion) {
+   |    ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `bench-snarkblock` (bench "bench") generated 5 warnings (run `cargo fix --bench "bench" -p bench-snarkblock` to apply 4 suggestions)
+    Finished `bench` profile [optimized + debuginfo] target(s) in 25.57s
+warning: the following packages contain code that will be rejected by a future version of Rust: ark-poly-commit v0.3.0
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+     Running benches/bench.rs (target/release/deps/bench-effd2a1b9d0c40ad)
+Gnuplot not found, using plotters backend
+Benchmarking Proving 1 SB attestation [nc=254,cs=32768,np=1]: Warming up for 3.0000 s
+Warning: Unable to complete 10 samples in 5.0s. You may wish to increase target time to 8.0s.
+Proving 1 SB attestation [nc=254,cs=32768,np=1]
+                        time:   [802.34 ms 846.05 ms 890.85 ms]
+
+Benchmarking Verifying 1 SB proof [buf,nc=254,cs=32768,np=1]: Warming up for 3.0000 s
+Warning: Unable to complete 10 samples in 5.0s. You may wish to increase target time to 7.7s or enable flat sampling.
+Verifying 1 SB proof [buf,nc=254,cs=32768,np=1]
+                        time:   [134.30 ms 135.76 ms 136.88 ms]
+
+ok
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock main @

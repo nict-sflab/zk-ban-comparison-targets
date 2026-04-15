@@ -66,14 +66,11 @@ fn full_attestation(c: &mut Criterion) {
         rand_issuance(&mut rng, priv_id, num_pubkeys);
 
     let blocklist_head_chunk = Chunk::gen_with_size(&mut rng, head_chunk_size);
-    let blocklist_tail_chunk = Chunk::gen_with_size(&mut rng, tail_chunk_size);
 
     let (iwf_pk, iwf_vk) = issuance_and_wf_setup(&mut rng, num_pubkeys);
     let (agg_iwf_pk, agg_iwf_vk) = agg_iwf_setup(&mut rng);
     let (head_chunk_pk, head_chunk_vk) = chunk_setup(&mut rng, head_chunk_size);
-    let (tail_chunk_pk, tail_chunk_vk) = chunk_setup(&mut rng, tail_chunk_size);
     let (agg_head_chunk_pk, agg_head_chunk_vk) = agg_chunk_setup(&mut rng, num_head_chunks);
-    let (agg_tail_chunk_pk, agg_tail_chunk_vk) = agg_chunk_setup(&mut rng, num_tail_chunks);
 
     let iwf_prover = IssuanceAndWfProver {
         priv_id,
@@ -97,36 +94,20 @@ fn full_attestation(c: &mut Criterion) {
         priv_id,
         proving_key: head_chunk_pk,
     };
-    let tail_chunk_prover = ChunkProver {
-        priv_id,
-        proving_key: tail_chunk_pk,
-    };
     let head_chunk_preparer = ChunkPreparer {
         verif_key: head_chunk_vk.clone(),
-    };
-    let tail_chunk_preparer = ChunkPreparer {
-        verif_key: tail_chunk_vk.clone(),
     };
     let agg_head_chunk_prover = AggChunkProver {
         priv_id,
         circuit_verif_key: head_chunk_vk.clone(),
         agg_proving_key: agg_head_chunk_pk.clone(),
     };
-    let agg_tail_chunk_prover = AggChunkProver {
-        priv_id,
-        circuit_verif_key: tail_chunk_vk.clone(),
-        agg_proving_key: agg_tail_chunk_pk.clone(),
-    };
     let agg_head_chunk_verifier = AggChunkVerifier {
         circuit_verif_key: head_chunk_vk,
         agg_verif_key: agg_head_chunk_vk,
     };
-    let agg_tail_chunk_verifier = AggChunkVerifier {
-        circuit_verif_key: tail_chunk_vk,
-        agg_verif_key: agg_tail_chunk_vk,
-    };
     let snarkblock_verifier = SnarkblockVerifier {
-        agg_chunk_verifiers: vec![agg_head_chunk_verifier, agg_tail_chunk_verifier],
+        agg_chunk_verifiers: vec![agg_head_chunk_verifier],
         agg_iwf_verifier,
     };
 
@@ -136,17 +117,9 @@ fn full_attestation(c: &mut Criterion) {
             .expect("couldn't prepare chunk");
         vec![prepared_chunk; num_head_chunks]
     };
-    let mut prepared_tail_chunks: Vec<PreparedChunk> = {
-        let prepared_chunk = tail_chunk_preparer
-            .prepare(&blocklist_tail_chunk)
-            .expect("couldn't prepare chunk");
-        vec![prepared_chunk; num_tail_chunks]
-    };
 
     let blocklist_head_com =
         BlocklistCom::from_prepared_chunks(&mut prepared_head_chunks, &agg_head_chunk_pk);
-    let blocklist_tail_com =
-        BlocklistCom::from_prepared_chunks(&mut prepared_tail_chunks, &agg_tail_chunk_pk);
 
     let mut head_chunk_proofs: Vec<ChunkProof> = {
         let proof = head_chunk_prover
@@ -155,12 +128,6 @@ fn full_attestation(c: &mut Criterion) {
         vec![proof; num_head_chunks]
     };
 
-    let mut tail_chunk_proofs: Vec<ChunkProof> = {
-        let proof = tail_chunk_prover
-            .prove(&mut rng, &blocklist_tail_chunk)
-            .expect("couldn't prove chunk");
-        vec![proof; num_tail_chunks]
-    };
 
     c.bench_function(
         &format!(

@@ -1,2 +1,2 @@
-# bench-snarkblock
-Benchmark snarkblock compared to zk-BAN
+# zk-ban-comparison-targets
+Benchmark comparisons targets (e.g., classic signature based revocation, SNARKBlock, ALPACA)

@@ -184,5 +184,6 @@ fn bench_auth(c: &mut Criterion) {
     );
 }
 
-criterion_group!(benches, bench_auth, bench_sync);
+// criterion_group!(benches, bench_sync);
+criterion_group!(benches, bench_auth);
 criterion_main!(benches);

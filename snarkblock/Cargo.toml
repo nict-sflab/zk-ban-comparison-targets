@@ -4,10 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-snarkblock = { git = "https://github.com/akakou-fork/snarkblock", branch = "hotfix/hiciap-repo-url", features = ["asm", "parallel", "benchmarking"] }
+snarkblock = { git = "https://github.com/rozbb/snarkblock", features = ["asm", "parallel", "benchmarking"] }
 
 rayon = "1.5"
 thiserror = "1"
+
+[patch."https://github.com/rozbb/snarkblock"]
+hiciap = { git = "https://github.com/rozbb/hiciap" }
 
 
 [dev-dependencies]

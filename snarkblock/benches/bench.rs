@@ -1,5 +1,4 @@
-use criterion::{criterion_group, criterion_main, Criterion};
-use rayon::prelude::*;
+use snarkblock::ark_serialize::CanonicalSerialize;
 use snarkblock::test_util::{rand_issuance, test_rng};
 use snarkblock::{
     agg_chunk_setup, agg_iwf_setup, chunk_setup, issuance_and_wf_setup, AggChunkProver,
@@ -8,62 +7,69 @@ use snarkblock::{
     SnarkblockVerifier,
 };
 
-const SYNC_NUM_CHUNKS: usize = 30;
-const SYNC_CHUNK_SIZE: usize = 1024;
+use std::{fs::File, io::Write};
 
-const AUTH_NUM_PUBKEYS: usize = 1;
-const AUTH_NUM_HEAD_CHUNKS: usize = 254;
-const AUTH_HEAD_CHUNK_SIZE: usize = 32768;
+use criterion::{criterion_group, criterion_main, Criterion};
+use rayon::prelude::*;
 
-fn bench_sync(c: &mut Criterion) {
+fn chunk_proof(c: &mut Criterion) {
     let mut rng = test_rng();
     let priv_id = PrivateId::gen(&mut rng);
-    let chunk = Chunk::gen_with_size(&mut rng, SYNC_CHUNK_SIZE);
-    let (chunk_pk, _) = chunk_setup(&mut rng, SYNC_CHUNK_SIZE);
+
+    let chunk_size = 16;
+    let num_chunks = 32;
+    let chunk = Chunk::gen_with_size(&mut rng, chunk_size);
+
+    let (chunk_pk, _) = chunk_setup(&mut rng, chunk_size);
     let chunk_prover = ChunkProver {
         priv_id,
         proving_key: chunk_pk,
     };
 
     c.bench_function(
-        &format!(
-            "Sync cost: prove {} chunks in parallel [cs={}]",
-            SYNC_NUM_CHUNKS, SYNC_CHUNK_SIZE
-        ),
+        &format!("Proving {} chunk(s) [cs={}]", num_chunks, chunk_size),
         |b| {
             b.iter(|| {
-                (0..SYNC_NUM_CHUNKS).into_par_iter().for_each(|_| {
-                    let mut thread_rng = test_rng();
+                // Do num_chunks chunk proofs in parallel
+                (0..num_chunks).into_par_iter().for_each(|_| {
+                    let mut rng = test_rng();
                     chunk_prover
-                        .prove(&mut thread_rng, &chunk)
+                        .prove(&mut rng, &chunk)
                         .expect("couldn't prove chunk");
                 })
             })
         },
     );
-}
 
-fn bench_auth(c: &mut Criterion) {
+}
+fn full_attestation(c: &mut Criterion) {
     let mut rng = test_rng();
+
+    let mut proof_sizes: Vec<(bool, usize, usize, usize)> = Vec::new();
+
+    let head_chunk_size = 32768;
+    let num_head_chunks = 254;
+
+    let num_pubkeys = 1;
 
     let priv_id = PrivateId::gen(&mut rng);
     let blocklist_elem = priv_id.gen_blocklist_elem(&mut rng);
     let (pubkeys, signers_pubkey_idx, sig, priv_id_opening) =
-        rand_issuance(&mut rng, priv_id, AUTH_NUM_PUBKEYS);
+        rand_issuance(&mut rng, priv_id, num_pubkeys);
 
-    let blocklist_head_chunk = Chunk::gen_with_size(&mut rng, AUTH_HEAD_CHUNK_SIZE);
+    let blocklist_head_chunk = Chunk::gen_with_size(&mut rng, head_chunk_size);
 
-    let (iwf_pk, iwf_vk) = issuance_and_wf_setup(&mut rng, AUTH_NUM_PUBKEYS);
+    let (iwf_pk, iwf_vk) = issuance_and_wf_setup(&mut rng, num_pubkeys);
     let (agg_iwf_pk, agg_iwf_vk) = agg_iwf_setup(&mut rng);
-    let (head_chunk_pk, head_chunk_vk) = chunk_setup(&mut rng, AUTH_HEAD_CHUNK_SIZE);
-    let (agg_head_chunk_pk, agg_head_chunk_vk) = agg_chunk_setup(&mut rng, AUTH_NUM_HEAD_CHUNKS);
+    let (head_chunk_pk, head_chunk_vk) = chunk_setup(&mut rng, head_chunk_size);
+    let (agg_head_chunk_pk, agg_head_chunk_vk) = agg_chunk_setup(&mut rng, num_head_chunks);
 
     let iwf_prover = IssuanceAndWfProver {
         priv_id,
         pubkeys: pubkeys.clone(),
         signers_pubkey_idx,
-        priv_id_opening,
-        sig,
+        priv_id_opening: priv_id_opening.clone(),
+        sig: sig.clone(),
         proving_key: iwf_pk,
     };
     let agg_iwf_prover = AggIwfProver {
@@ -72,7 +78,7 @@ fn bench_auth(c: &mut Criterion) {
         agg_proving_key: agg_iwf_pk,
     };
     let agg_iwf_verifier = AggIwfVerifier {
-        pubkeys,
+        pubkeys: pubkeys.clone(),
         circuit_verif_key: iwf_vk,
         agg_verif_key: agg_iwf_vk,
     };
@@ -97,25 +103,28 @@ fn bench_auth(c: &mut Criterion) {
         agg_iwf_verifier,
     };
 
-    let prepared_head_chunk = head_chunk_preparer
-        .prepare(&blocklist_head_chunk)
-        .expect("couldn't prepare chunk");
-    let prepared_head_chunks_template: Vec<PreparedChunk> =
-        vec![prepared_head_chunk; AUTH_NUM_HEAD_CHUNKS];
-    let head_chunk_proof = head_chunk_prover
-        .prove(&mut rng, &blocklist_head_chunk)
-        .expect("couldn't prove chunk");
-    let head_chunk_proofs_template: Vec<ChunkProof> =
-        vec![head_chunk_proof; AUTH_NUM_HEAD_CHUNKS];
+    let mut prepared_head_chunks: Vec<PreparedChunk> = {
+        let prepared_chunk = head_chunk_preparer
+            .prepare(&blocklist_head_chunk)
+            .expect("couldn't prepare chunk");
+        vec![prepared_chunk; num_head_chunks]
+    };
 
-    let mut prepared_for_com = prepared_head_chunks_template.clone();
     let blocklist_head_com =
-        BlocklistCom::from_prepared_chunks(&mut prepared_for_com, &agg_head_chunk_pk);
+        BlocklistCom::from_prepared_chunks(&mut prepared_head_chunks, &agg_head_chunk_pk);
+
+    let mut head_chunk_proofs: Vec<ChunkProof> = {
+        let proof = head_chunk_prover
+            .prove(&mut rng, &blocklist_head_chunk)
+            .expect("couldn't prove chunk");
+        vec![proof; num_head_chunks]
+    };
+
 
     c.bench_function(
         &format!(
-            "Authentication prover latency [offline-chunks,nc={},cs={},np={}]",
-            AUTH_NUM_HEAD_CHUNKS, AUTH_HEAD_CHUNK_SIZE, AUTH_NUM_PUBKEYS
+            "Proving 1 SB attestation [nc={},cs={},np={}]",
+            num_head_chunks, head_chunk_size, num_pubkeys
         ),
         |b| {
             b.iter(|| {
@@ -128,9 +137,6 @@ fn bench_auth(c: &mut Criterion) {
                         .expect("couldn't prove IWF HiCIAP")
                 };
 
-                let mut head_chunk_proofs = head_chunk_proofs_template.clone();
-                let mut prepared_head_chunks = prepared_head_chunks_template.clone();
-
                 let agg_head_chunk_proof = agg_head_chunk_prover
                     .prove(
                         &mut rng,
@@ -139,20 +145,17 @@ fn bench_auth(c: &mut Criterion) {
                     )
                     .expect("couldn't prove HiCIAP over head chunks");
 
-                let _snarkblock_proof =
-                    SnarkblockProof::new(&mut rng, agg_iwf_proof, vec![agg_head_chunk_proof]);
+                let _snarkblock_proof = SnarkblockProof::new(
+                    &mut rng,
+                    agg_iwf_proof,
+                    vec![agg_head_chunk_proof],
+                );
             })
         },
     );
 
-    let mut initial_head_chunk_proofs = head_chunk_proofs_template.clone();
-    let mut prepared_for_proof = prepared_head_chunks_template.clone();
     let agg_head_chunk_proof = agg_head_chunk_prover
-        .prove(
-            &mut rng,
-            &mut initial_head_chunk_proofs,
-            &mut prepared_for_proof,
-        )
+        .prove(&mut rng, &mut head_chunk_proofs, &mut prepared_head_chunks)
         .expect("couldn't prove HiCIAP over head chunks");
     let agg_iwf_proof = {
         let base_iwf_proof = iwf_prover
@@ -162,13 +165,17 @@ fn bench_auth(c: &mut Criterion) {
             .prove(&mut rng, &base_iwf_proof)
             .expect("couldn't prove IWF HiCIAP")
     };
-    let unbuffered_snarkblock_proof =
-        SnarkblockProof::new(&mut rng, agg_iwf_proof, vec![agg_head_chunk_proof]);
+
+    let snarkblock_proof = SnarkblockProof::new(
+        &mut rng,
+        agg_iwf_proof.clone(),
+        vec![agg_head_chunk_proof.clone()],
+    );
 
     c.bench_function(
         &format!(
-            "Authentication verifier latency [nobuf,nc={},cs={},np={}]",
-            AUTH_NUM_HEAD_CHUNKS, AUTH_HEAD_CHUNK_SIZE, AUTH_NUM_PUBKEYS
+            "Verifying 1 SB proof [buf,nc={},cs={},np={}]",
+            num_head_chunks, head_chunk_size, num_pubkeys
         ),
         |b| {
             b.iter(|| {
@@ -176,7 +183,7 @@ fn bench_auth(c: &mut Criterion) {
                     .verify(
                         vec![blocklist_head_com.clone()],
                         &blocklist_elem,
-                        unbuffered_snarkblock_proof.clone(),
+                        snarkblock_proof.clone(),
                     )
                     .unwrap());
             })
@@ -184,6 +191,6 @@ fn bench_auth(c: &mut Criterion) {
     );
 }
 
-// criterion_group!(benches, bench_sync);
-criterion_group!(benches, bench_auth);
+// criterion_group!(benches, chunk_proof);
+criterion_group!(benches, full_attestation);
 criterion_main!(benches);

@@ -16,7 +16,7 @@ fn chunk_proof(c: &mut Criterion) {
     let mut rng = test_rng();
     let priv_id = PrivateId::gen(&mut rng);
 
-    let chunk_size = 16;
+    let chunk_size = 1024;
     let num_chunks = 32;
     let chunk = Chunk::gen_with_size(&mut rng, chunk_size);
 
@@ -191,6 +191,6 @@ fn full_attestation(c: &mut Criterion) {
     );
 }
 
-// criterion_group!(benches, chunk_proof);
-criterion_group!(benches, full_attestation);
+criterion_group!(benches, chunk_proof);
+// criterion_group!(benches, full_attestation);
 criterion_main!(benches);

@@ -1,0 +1,66 @@
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock bench/all @ sh run_benches.sh; alert 'done'
+warning: function `main` is never used
+ --> src/lib.rs:1:4
+  |
+1 | fn main() {
+  |    ^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `bench-snarkblock` (lib) generated 1 warning
+   Compiling bench-snarkblock v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/snarkblock)
+warning: unused import: `snarkblock::ark_serialize::CanonicalSerialize`
+ --> benches/bench.rs:1:5
+  |
+1 | use snarkblock::ark_serialize::CanonicalSerialize;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `fs::File` and `io::Write`
+  --> benches/bench.rs:10:11
+   |
+10 | use std::{fs::File, io::Write};
+   |           ^^^^^^^^  ^^^^^^^^^
+
+warning: variable does not need to be mutable
+  --> benches/bench.rs:48:9
+   |
+48 |     let mut proof_sizes: Vec<(bool, usize, usize, usize)> = Vec::new();
+   |         ----^^^^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `proof_sizes`
+  --> benches/bench.rs:48:9
+   |
+48 |     let mut proof_sizes: Vec<(bool, usize, usize, usize)> = Vec::new();
+   |         ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_proof_sizes`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `full_attestation` is never used
+  --> benches/bench.rs:45:4
+   |
+45 | fn full_attestation(c: &mut Criterion) {
+   |    ^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `bench-snarkblock` (bench "bench") generated 5 warnings (run `cargo fix --bench "bench" -p bench-snarkblock` to apply 4 suggestions)
+    Finished `bench` profile [optimized + debuginfo] target(s) in 4.37s
+warning: the following packages contain code that will be rejected by a future version of Rust: ark-poly-commit v0.3.0
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+     Running benches/bench.rs (target/release/deps/bench-effd2a1b9d0c40ad)
+Gnuplot not found, using plotters backend
+Benchmarking Proving 32 chunk(s) [cs=1024]: Warming up for 3.0000 s
+Warning: Unable to complete 20 samples in 5.0s. You may wish to increase target time to 2103.8s, or reduce sample count to 10.
+Proving 32 chunk(s) [cs=1024]
+                        time:   [86.880 s 88.415 s 90.151 s]
+Found 1 outliers among 20 measurements (5.00%)
+  1 (5.00%) high mild
+
+ok
+akama@nixos ~/Documents/zk-ban-comparison-targets/snarkblock bench/all @

@@ -1,0 +1,723 @@
+[akama@nixos:~/Documents/zk-ban-comparison-targets/alpaca/alpaca]$ cargo run --example example --release
+warning: hiding a lifetime that's elided elsewhere is confusing
+  --> circ-alpaca/third_party/ZoKrates/zokrates_parser/src/lib.rs:15:21
+   |
+15 | pub fn parse(input: &str) -> Result<Pairs<Rule>, Error<Rule>> {
+   |                     ^^^^            ^^^^^^^^^^^ the same lifetime is hidden here
+   |                     |
+   |                     the lifetime is elided here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+   = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+   |
+15 | pub fn parse(input: &str) -> Result<Pairs<'_, Rule>, Error<Rule>> {
+   |                                           +++
+
+warning: `zokrates_parser` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_parser` to apply 1 suggestion)
+warning: hiding a lifetime that's elided elsewhere is confusing
+    --> circ-alpaca/third_party/ZoKrates/zokrates_pest_ast/src/lib.rs:1110:28
+     |
+1110 | pub fn generate_ast(input: &str) -> Result<ast::File, Error> {
+     |                            ^^^^            ^^^^^^^^^ the same lifetime is hidden here
+     |                            |
+     |                            the lifetime is elided here
+     |
+     = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+     = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+     |
+1110 | pub fn generate_ast(input: &str) -> Result<ast::File<'_>, Error> {
+     |                                                     ++++
+
+warning: `zokrates_pest_ast` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_pest_ast` to apply 1 suggestion)
+warning: unused import: `trace`
+ --> circ-alpaca/src/target/r1cs/mod.rs:5:18
+  |
+5 | use log::{debug, trace};
+  |                  ^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `merlin::Transcript`
+ --> circ-alpaca/src/target/r1cs/spartan.rs:8:5
+  |
+8 | use merlin::Transcript;
+  |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Write`
+  --> circ-alpaca/src/target/r1cs/spartan.rs:12:37
+   |
+12 | use std::io::{BufReader, BufWriter, Write};
+   |                                     ^^^^^
+
+warning: unused import: `std::io::Write`
+ --> circ-alpaca/src/target/r1cs/wit_comp.rs:8:5
+  |
+8 | use std::io::Write;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `std::time::Instant`
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:10:5
+   |
+10 | use std::time::Instant;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `circ_fields::FieldV`
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:11:5
+   |
+11 | use circ_fields::FieldV;
+   |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::ir::term::Value::Field`
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:17:5
+   |
+17 | use crate::ir::term::Value::Field;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `merlin::Transcript`
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:18:5
+   |
+18 | use merlin::Transcript;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::target::r1cs::wit_comp::StagedWitComp`
+   --> circ-alpaca/src/target/r1cs/mod.rs:804:5
+    |
+804 | use crate::target::r1cs::wit_comp::StagedWitComp;
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused variable: `elapsed`
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:42:9
+   |
+42 |     let elapsed = timer.elapsed();
+   |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_elapsed`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: associated items `eval_step_operation`, `get_eq`, and `write_eval_operations` are never used
+   --> circ-alpaca/src/target/r1cs/wit_comp.rs:174:8
+    |
+121 | impl<'a> StagedWitCompEvaluator<'a> {
+    | ----------------------------------- associated items in this implementation
+...
+174 |     fn eval_step_operation(&mut self) -> (usize, (Op, Vec<usize>)) {
+    |        ^^^^^^^^^^^^^^^^^^^
+...
+196 |     fn get_eq(&self, id: usize, operands: Vec<&Value>) -> String {
+    |        ^^^^^^
+...
+529 |     fn write_eval_operations(eval_operations: &BTreeMap<usize, (Op, Vec<usize>)>) -> io::Result<()> {
+    |        ^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> circ-alpaca/src/ir/term/fmt.rs:211:19
+    |
+211 | pub fn wrap<T>(t: &T) -> IrWrapper<T> {
+    |                   ^^     ^^^^^^^^^^^^ the same lifetime is hidden here
+    |                   |
+    |                   the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+    = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: use `'_` for type paths
+    |
+211 | pub fn wrap<T>(t: &T) -> IrWrapper<'_, T> {
+    |                                    +++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> circ-alpaca/src/ir/term/text/mod.rs:127:26
+    |
+127 | fn parse_tok_tree(bytes: &[u8]) -> TokTree {
+    |                          ^^^^^     ^^^^^^^ the same lifetime is hidden here
+    |                          |
+    |                          the lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+127 | fn parse_tok_tree(bytes: &[u8]) -> TokTree<'_> {
+    |                                           ++++
+
+warning: hiding a lifetime that's elided elsewhere is confusing
+   --> circ-alpaca/src/front/zsharp/parser.rs:109:33
+    |
+109 |     pub fn load<P: AsRef<Path>>(&self, p: &P) -> HashMap<PathBuf, ast::File> {
+    |                                 ^^^^^ the lifetime is elided here ^^^^^^^^^ the same lifetime is hidden here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: use `'_` for type paths
+    |
+109 |     pub fn load<P: AsRef<Path>>(&self, p: &P) -> HashMap<PathBuf, ast::File<'_>> {
+    |                                                                            ++++
+
+warning: missing documentation for a module
+  --> circ-alpaca/src/target/r1cs/mod.rs:26:1
+   |
+26 | pub mod spartan_opt;
+   | ^^^^^^^^^^^^^^^^^^^
+   |
+note: the lint level is defined here
+  --> circ-alpaca/src/lib.rs:5:9
+   |
+ 5 | #![warn(missing_docs)]
+   |         ^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+   --> circ-alpaca/src/target/r1cs/mod.rs:150:5
+    |
+150 |     pub vars: Vec<Var>,
+    |     ^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+   --> circ-alpaca/src/target/r1cs/mod.rs:151:5
+    |
+151 |     pub constraints: Vec<(Lc, Lc, Lc)>,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+   --> circ-alpaca/src/target/r1cs/mod.rs:152:5
+    |
+152 |     pub names: HashMap<Var, String>,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a method
+   --> circ-alpaca/src/target/r1cs/mod.rs:176:5
+    |
+176 |     pub fn ty(&self) -> VarType {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+   --> circ-alpaca/src/target/r1cs/mod.rs:698:5
+    |
+698 |     pub modulus: FieldT,
+    |     ^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+   --> circ-alpaca/src/target/r1cs/mod.rs:699:5
+    |
+699 |     pub constant: FieldV,
+    |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+   --> circ-alpaca/src/target/r1cs/mod.rs:700:5
+    |
+700 |     pub monomials: HashMap<Var, FieldV>,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused `std::result::Result` that must be used
+  --> circ-alpaca/src/target/r1cs/proof.rs:16:5
+   |
+16 |     bincode::serde::encode_into_std_write(data, &mut file, bincode::config::legacy());
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+16 |     let _ = bincode::serde::encode_into_std_write(data, &mut file, bincode::config::legacy());
+   |     +++++++
+
+warning: missing documentation for a method
+  --> circ-alpaca/src/target/r1cs/spartan.rs:25:5
+   |
+25 |     pub fn sid(&self) -> usize { self.sid }
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a method
+  --> circ-alpaca/src/target/r1cs/spartan.rs:27:5
+   |
+27 |     pub fn value(&self) -> [u8; 32] { self.value }
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan.rs:246:1
+    |
+246 | pub fn int_to_scalar(i: &Integer) -> Scalar {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan.rs:264:1
+    |
+264 | pub fn lc_to_v(lc: &Lc, const_id: usize, trans: &HashMap<Var, usize>) -> Vec<Variable> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan.rs:305:1
+    |
+305 | pub fn read_prover_data<P: AsRef<Path>>(path: P) -> io::Result<ProverData> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan.rs:317:1
+    |
+317 | pub fn read_verifier_data<P: AsRef<Path>>(path: P) -> io::Result<VerifierData> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:30:5
+   |
+30 |     pub stages: Vec<Stage>,
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:31:5
+   |
+31 |     pub steps: Vec<(Op, usize)>,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:33:5
+   |
+33 |     pub ouput_steps: Vec<usize>,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct field
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:44:5
+   |
+44 |     pub num_outputs: usize,
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a method
+  --> circ-alpaca/src/target/r1cs/wit_comp.rs:97:5
+   |
+97 |     pub fn step_args(&self, step_idx: usize) -> impl Iterator<Item=usize> + '_ {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for an associated function
+   --> circ-alpaca/src/target/r1cs/wit_comp.rs:536:5
+    |
+536 |     pub fn read_eval_operations() -> io::Result<BTreeMap<usize, (Op, Vec<usize>)>> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a struct
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:21:1
+   |
+21 | pub struct SpartanInstance {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:30:1
+   |
+30 | / pub fn r1cs_values(
+31 | |     precompute_path: &str,
+32 | |     vars_size: usize,
+33 | |     inputs_map: &FxHashMap<String, Value>,
+34 | | ) -> io::Result<Vec<FieldV>> {
+   | |____________________________^
+
+warning: missing documentation for a function
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:64:1
+   |
+64 | pub fn write_precompute<P: AsRef<Path>>(path: P, data: &StagedWitComp) -> io::Result<()> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:70:1
+   |
+70 | pub fn read_precompute<P: AsRef<Path>>(path: P) -> io::Result<wit_comp::StagedWitComp> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:76:1
+   |
+76 | pub fn write_r1cs_final<P: AsRef<Path>>(path: P, data: &R1csFinal) -> io::Result<()> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:82:1
+   |
+82 | pub fn read_r1cs_final<P: AsRef<Path>>(path: P) -> io::Result<R1csFinal> {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+  --> circ-alpaca/src/target/r1cs/spartan_opt.rs:88:1
+   |
+88 | / pub fn prove(
+89 | |     prover_data: &ProverData,
+90 | |     inputs_map: &FxHashMap<String, Value>,
+91 | |     gens: &NIZKGens,
+92 | |     inst: &Instance
+93 | | ) -> io::Result<NIZK> {
+   | |_____________________^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan_opt.rs:108:1
+    |
+108 | / pub fn verify(
+109 | |     verifier_data: &VerifierData,
+110 | |     inputs_map: &FxHashMap<String, Value>,
+111 | |     gens: &NIZKGens,
+112 | |     inst: &Instance,
+113 | |     proof: NIZK,
+114 | | ) -> io::Result<()> {
+    | |___________________^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan_opt.rs:134:1
+    |
+134 | pub fn preprocess_spartan(prover_data: &ProverData) -> io::Result<(NIZKGens, Instance)> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan_opt.rs:202:1
+    |
+202 | pub fn read_preprocessed_spartan<P1: AsRef<Path>, P2: AsRef<Path>>(gens_path: P1, inst_path: P2) -> io::Result<(NIZKGens, Instance)> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: missing documentation for a function
+   --> circ-alpaca/src/target/r1cs/spartan_opt.rs:212:1
+    |
+212 | pub fn write_preprocessed_spartan<P1: AsRef<Path>, P2: AsRef<Path>>(gens_path: P1, inst_path: P2, p_data: &ProverData) -> io::Result<()> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `circ` (lib) generated 46 warnings (run `cargo fix --lib -p circ` to apply 13 suggestions)
+warning: unused import: `PrimeFieldBits`
+ --> src/commitment.rs:2:22
+  |
+2 | use ff::{PrimeField, PrimeFieldBits};
+  |                      ^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused imports: `Deserialize` and `Serialize`
+ --> src/commitment.rs:3:13
+  |
+3 | use serde::{Deserialize, Serialize};
+  |             ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `Read`
+ --> src/proofs/relation_post/zksnark.rs:1:15
+  |
+1 | use std::io::{Read};
+  |               ^^^^
+
+warning: unused imports: `PrimeFieldBits` and `PrimeField`
+ --> src/proofs/relation_post/zksnark.rs:6:17
+  |
+6 | use ff::{Field, PrimeField, PrimeFieldBits};
+  |                 ^^^^^^^^^^  ^^^^^^^^^^^^^^
+
+warning: unused imports: `Deserialize` and `Serialize`
+ --> src/proofs/relation_post/zksnark.rs:9:13
+  |
+9 | use serde::{Deserialize, Serialize};
+  |             ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `Variable`
+ --> src/proofs/relation_nova/ivc/r1cs_adapter.rs:3:60
+  |
+3 | use bellpepper_core::{ConstraintSystem, LinearCombination, Variable};
+  |                                                            ^^^^^^^^
+
+warning: unused import: `PrimeFieldBits`
+ --> src/proofs/relation_nova/ivc/f_circuit.rs:5:29
+  |
+5 | use ff::{Field, PrimeField, PrimeFieldBits};
+  |                             ^^^^^^^^^^^^^^
+
+warning: unused import: `nova_snark::traits::Engine`
+ --> src/proofs/relation_nova/ivc/f_circuit.rs:8:5
+  |
+8 | use nova_snark::traits::Engine;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Deserialize` and `Serialize`
+ --> src/proofs/relation_nova/ivc/f_circuit.rs:9:13
+  |
+9 | use serde::{Deserialize, Serialize};
+  |             ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `crate::traits::signature::SignatureScheme`
+  --> src/proofs/relation_nova/ivc/f_circuit.rs:18:5
+   |
+18 | use crate::traits::signature::SignatureScheme;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `PrimeFieldBits`
+ --> src/proofs/relation_nova/ivc/ivc.rs:2:29
+  |
+2 | use ff::{Field, PrimeField, PrimeFieldBits};
+  |                             ^^^^^^^^^^^^^^
+
+warning: unused imports: `Deserialize` and `Serialize`
+ --> src/proofs/relation_nova/ivc/ivc.rs:7:13
+  |
+7 | use serde::{Deserialize, Serialize};
+  |             ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `std::io::Write`
+ --> src/blocklist.rs:2:5
+  |
+2 | use std::io::Write;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `crate::traits::blocklist::AnonymousBlocklistingScheme`
+  --> src/proofs/relation_nova/ivc/f_circuit.rs:16:5
+   |
+16 | use crate::traits::blocklist::AnonymousBlocklistingScheme;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `Field`
+ --> src/proofs/relation_nova/ivc/f_circuit.rs:5:10
+  |
+5 | use ff::{Field, PrimeField, PrimeFieldBits};
+  |          ^^^^^
+
+warning: unused import: `Field`
+ --> src/proofs/relation_nova/ivc/r1cs_adapter.rs:8:10
+  |
+8 | use ff::{Field, PrimeField};
+  |          ^^^^^
+
+warning: variable does not need to be mutable
+   --> src/proofs/relation_nova/ivc/ivc.rs:129:13
+    |
+129 |         let mut recursive_snark: RecursiveSNARK<E1, E2, FCircuit<<E1 as Engine>::Scalar>, TrivialCircuit<<E2 as Engine>::Scalar>> =
+    |             ----^^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> src/blocklist.rs:242:13
+    |
+242 |         let mut dummy_blocklist = Self::initialize_blocklist(&self).unwrap();
+    |             ----^^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> src/blocklist.rs:250:13
+    |
+250 |         let mut csprng = OsRng;
+    |             ----^^^^^^
+    |             |
+    |             help: remove this `mut`
+
+warning: struct `PoseidonConstantsCircuit` is never constructed
+  --> src/poseidon.rs:20:12
+   |
+20 | pub struct PoseidonConstantsCircuit<F: PrimeField>(PoseidonConstants<F, U24>);
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: struct `PoseidonRO` is never constructed
+  --> src/poseidon.rs:30:8
+   |
+30 | struct PoseidonRO<F>
+   |        ^^^^^^^^^^
+
+warning: struct `PoseidonROCircuit` is never constructed
+   --> src/poseidon.rs:104:12
+    |
+104 | pub struct PoseidonROCircuit<Scalar: PrimeField> {
+    |            ^^^^^^^^^^^^^^^^^
+
+warning: constant `MODULAR` is never used
+  --> src/proofs/relation_post/zksnark.rs:21:7
+   |
+21 | const MODULAR: &str = "28948022309329048855892746252171976963363056481941647379679742748393362948097";
+   |       ^^^^^^^
+
+warning: associated function `verify` is never used
+   --> src/proofs/relation_nova/ivc/ivc.rs:187:12
+    |
+ 95 | / impl<E1, E2, S1, S2> Ivc<E1, E2, S1, S2>
+ 96 | | where
+ 97 | |     E1: Engine<Base=<E2 as Engine>::Scalar>,
+ 98 | |     E2: Engine<Base=<E1 as Engine>::Scalar>,
+ 99 | |     S1: RelaxedR1CSSNARKTrait<E1>,
+100 | |     S2: RelaxedR1CSSNARKTrait<E2>,
+101 | |     <E2 as Engine>::Scalar: PrimeField<Repr=[u8; 32]>,
+    | |______________________________________________________- associated function in this implementation
+...
+187 |       pub fn verify(
+    |              ^^^^^^
+
+warning: function `hex_str` is never used
+  --> src/util.rs:52:8
+   |
+52 | pub fn hex_str<F: PrimeField>(field: F) -> String {
+   |        ^^^^^^^
+
+warning: function `run_python_script` is never used
+  --> src/util.rs:87:8
+   |
+87 | pub fn run_python_script(path: &str, args: Vec<String>) {
+   |        ^^^^^^^^^^^^^^^^^
+
+warning: function `hex_string_from` is never used
+   --> src/util.rs:109:8
+    |
+109 | pub fn hex_string_from(bytes: &[u8]) -> String {
+    |        ^^^^^^^^^^^^^^^
+
+warning: constant `RATE` is never used
+  --> src/hash/poseidon.rs:13:7
+   |
+13 | const RATE: usize = 8;
+   |       ^^^^
+
+warning: eliding a lifetime that's named elsewhere is confusing
+  --> src/traits/blocklist.rs:46:116
+   |
+46 |     fn add_token_to_blocklist<'a>(&'a self, token: &Self::AuthToken, blocklist: &'a mut Self::Blocklist) -> Result<&mut Self::Blocklist, AnonymousBlocklistError>;
+   |                                    -- the lifetime is named here                 -- the lifetime is named here     ^^^^^^^^^^^^^^^^^^^^ the same lifetime is elided here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+   = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+help: consistently use `'a`
+   |
+46 |     fn add_token_to_blocklist<'a>(&'a self, token: &Self::AuthToken, blocklist: &'a mut Self::Blocklist) -> Result<&'a mut Self::Blocklist, AnonymousBlocklistError>;
+   |                                                                                                                     ++
+
+warning: eliding a lifetime that's named elsewhere is confusing
+  --> src/traits/blocklist.rs:48:153
+   |
+48 |     fn remove_from_blocklist<'a>(&'a self, block: Self::Block, sk_sp: &Self::SecretKey, ban_over_signatures: &'a mut Self::BanOverSignatures) -> Result<&mut Self::BanOverSignatures, AnonymousBlocklistError>;
+   |                                   -- the lifetime is named here                                               -- the lifetime is named here             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the same lifetime is elided
+ here
+   |
+   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: consistently use `'a`
+   |
+48 |     fn remove_from_blocklist<'a>(&'a self, block: Self::Block, sk_sp: &Self::SecretKey, ban_over_signatures: &'a mut Self::BanOverSignatures) -> Result<&'a mut Self::BanOverSignatures, AnonymousBlocklistError
+>;
+   |                                                                                                                                                          ++
+
+warning: structure field `R` should have a snake case name
+  --> src/signature.rs:15:9
+   |
+15 |     pub R: C::Point,
+   |         ^ help: convert the identifier to snake case: `r`
+   |
+   = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: variable `R` should have a snake case name
+  --> src/signature.rs:57:58
+   |
+57 | fn hash_of<C: PastaCurve>(pk: &<C as PastaCurve>::Point, R: &<C as PastaCurve>::Point, message: Vec<<C as PastaCurve>::Base>) -> <C as PastaCurve>::Scalar {
+   |                                                          ^ help: convert the identifier to snake case: `r`
+
+warning: variable `R_x` should have a snake case name
+  --> src/signature.rs:58:10
+   |
+58 |     let (R_x, R_y) = C::to_affine(R);
+   |          ^^^ help: convert the identifier to snake case: `r_x`
+
+warning: variable `R_y` should have a snake case name
+  --> src/signature.rs:58:15
+   |
+58 |     let (R_x, R_y) = C::to_affine(R);
+   |               ^^^ help: convert the identifier to snake case: `r_y`
+
+warning: eliding a lifetime that's named elsewhere is confusing
+   --> src/blocklist.rs:346:116
+    |
+346 |     fn add_token_to_blocklist<'a>(&'a self, token: &Self::AuthToken, blocklist: &'a mut Self::Blocklist) -> Result<&mut Self::Blocklist, AnonymousBlocklistError> {
+    |                                    -- the lifetime is named here                 -- the lifetime is named here     ^^^^^^^^^^^^^^^^^^^^ the same lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: consistently use `'a`
+    |
+346 |     fn add_token_to_blocklist<'a>(&'a self, token: &Self::AuthToken, blocklist: &'a mut Self::Blocklist) -> Result<&'a mut Self::Blocklist, AnonymousBlocklistError> {
+    |                                                                                                                     ++
+
+warning: eliding a lifetime that's named elsewhere is confusing
+   --> src/blocklist.rs:371:153
+    |
+371 | ...klist<'a>(&'a self, block: Self::Block, sk_sp: &Self::SecretKey, ban_over_signatures: &'a mut Self::BanOverSignatures) -> Result<&mut Self::BanOverSignatures, AnonymousBlocklistError> {
+    |               -- the lifetime is named here                                               -- the lifetime is named here             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the same lifetime is elided here
+    |
+    = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+help: consistently use `'a`
+    |
+371 |     fn remove_from_blocklist<'a>(&'a self, block: Self::Block, sk_sp: &Self::SecretKey, ban_over_signatures: &'a mut Self::BanOverSignatures) -> Result<&'a mut Self::BanOverSignatures, AnonymousBlocklistErro
+r> {
+    |                                                                                                                                                          ++
+
+warning: `alpaca` (lib) generated 36 warnings (run `cargo fix --lib -p alpaca` to apply 20 suggestions)
+warning: variable does not need to be mutable
+  --> examples/example.rs:43:9
+   |
+43 |     let mut ban_over_signatures = HashMap::new();
+   |         ----^^^^^^^^^^^^^^^^^^^
+   |         |
+   |         help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `sk_sp`
+  --> examples/example.rs:36:46
+   |
+36 |     let (pp, pk_sp, pk_id, pk_r, pk_zksnark, sk_sp, sk_id, vk_r, vk_zksnark)
+   |                                              ^^^^^ help: if this is intentional, prefix it with an underscore: `_sk_sp`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `last_block`
+  --> examples/example.rs:88:13
+   |
+88 |         let last_block = blocklist[len - 1].clone();
+   |             ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_last_block`
+
+warning: unused variable: `last_prev_block`
+  --> examples/example.rs:89:13
+   |
+89 |         let last_prev_block = if len - 1 > 0 { Some(&blocklist[len - 2]) } else { None };
+   |             ^^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_last_prev_block`
+
+warning: `alpaca` (example "example") generated 4 warnings (run `cargo fix --example "example" -p alpaca` to apply 4 suggestions)
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.08s
+     Running `target/release/examples/example`
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:5> disable -r time
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:7> MODE=release
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:8> DIR=/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:9> BIN=/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/target/release/examples/c
+irc
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:10> ZK_BIN=/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/target/release/exampl
+es/zk
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:12> modulus=28948022309329048855892746252171976963363056481941647379679742748393362948097
++/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:19> spartan_r1cs
++spartan_r1cs:1> /home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/target/release/examples/circ --field-custom-modulus 2894802230932904885589274625217197696336305648194164737967974274839336
+2948097 /home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/function_f.zok r1cs --action spartan-setup --prover-key IVC_P --verifier-key IVC_V
++spartan_r1cs:2> /home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/target/release/examples/circ --field-custom-modulus 2894802230932904885589274625217197696336305648194164737967974274839336
+2948097 /home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/relation_post.zok r1cs --action spartan-setup
+Script output:
+Running frontend
+Running IR optimizations
+Running backend
+Running r1cs optimizations
+Final R1cs size: 31840
+Running frontend
+Running IR optimizations
+Running backend
+Running r1cs optimizations
+Final R1cs size: 16287
+
+Set up complete
+Initialized blocklist
+spartan::r1cs_to_spartan: 66.54ms
+1. append protocol name to transcript: 160.00ns
+2. append message to transcript: 116.35ms
+3. padding variables: 50.15µs
+timer_commit: 19.45ms
+timer_sc_proof_phase1: 52.70ms
+knowledge proof: 228.07µs
+product proof: 680.56µs
+equality proof: 357.21µs
+timer_sc_proof_phase2: 52.31ms
+poly eval proof: 26.95ms
+equality proof: 359.08µs
+4. R1CS proof: 153.06ms
+5. encoding proof: 23.54µs
+NIZK::prove: 269.50ms
+Verifying with Spartan
+Proof Verification Successful!
+
+[akama@nixos:~/Documents/zk-ban-comparison-targets/alpaca/alpaca]$

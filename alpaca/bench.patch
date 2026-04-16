@@ -1,0 +1,15 @@
+diff --git a/examples/example.rs b/examples/example.rs
+index dab98f3..afe5df0 100644
+--- a/examples/example.rs
++++ b/examples/example.rs
+@@ -20,9 +20,7 @@ pub const VER_TIMER_FILE: &str = "ver_time.txt";
+ 
+ fn main() {
+     let mut size_vector = Vec::new();
+-    for i in 1..2 {
+-        size_vector.push(2_i32.pow(i));
+-    }
++    size_vector.push(2_i32.pow(15));
+     experiment_with_blocklist_size(size_vector);
+ }
+ 

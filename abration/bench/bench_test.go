@@ -150,10 +150,39 @@ func dumpBenchArtifacts(b *testing.B, template frontend.Circuit) dumpedBenchArti
 		b.Fatal(err)
 	}
 
+	ccsInfo, err := os.Stat(ccsPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+	pkInfo, err := os.Stat(pkPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	fmt.Printf(
+		"constraints=%d ccs_size=%s proving_key_size=%s\n",
+		ccs.GetNbConstraints(),
+		formatBytes(ccsInfo.Size()),
+		formatBytes(pkInfo.Size()),
+	)
+
 	return dumpedBenchArtifacts{
 		ccsPath: ccsPath,
 		pkPath:  pkPath,
 	}
+}
+
+func formatBytes(n int64) string {
+	const unit = 1000
+	if n < unit {
+		return fmt.Sprintf("%d B", n)
+	}
+	div, exp := int64(unit), 0
+	for val := n / unit; val >= unit; val /= unit {
+		div *= unit
+		exp++
+	}
+	return fmt.Sprintf("%.3f %cB", float64(n)/float64(div), "KMGTPE"[exp])
 }
 
 func loadBenchArtifacts(

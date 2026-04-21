@@ -173,7 +173,7 @@ func dumpBenchArtifacts(b *testing.B, template frontend.Circuit) dumpedBenchArti
 }
 
 func formatBytes(n int64) string {
-	const unit = 1024
+	const unit = 1000
 	if n < unit {
 		return fmt.Sprintf("%d B", n)
 	}
@@ -182,7 +182,7 @@ func formatBytes(n int64) string {
 		div *= unit
 		exp++
 	}
-	return fmt.Sprintf("%.2f %ciB", float64(n)/float64(div), "KMGTPE"[exp])
+	return fmt.Sprintf("%.3f %cB", float64(n)/float64(div), "KMGTPE"[exp])
 }
 
 func loadBenchArtifacts(

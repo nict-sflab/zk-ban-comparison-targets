@@ -24,11 +24,6 @@ target
 # Added by cargo
 
 /target
-alpaca/auth_size.txt
-alpaca/auth_time.txt
-alpaca/usync_size.txt
-alpaca/usync_time.txt
-alpaca/ver_time.txt
 alpaca/GENS
 alpaca/IVC_P
 alpaca/IVC_PRECOMPUTE

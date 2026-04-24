@@ -1,0 +1,42 @@
+diff --git a/examples/example.rs b/examples/example.rs
+index dab98f3..ad8ce30 100644
+--- a/examples/example.rs
++++ b/examples/example.rs
+@@ -20,9 +20,7 @@ pub const VER_TIMER_FILE: &str = "ver_time.txt";
+ 
+ fn main() {
+     let mut size_vector = Vec::new();
+-    for i in 1..2 {
+-        size_vector.push(2_i32.pow(i));
+-    }
++    size_vector.push(2_i32.pow(15));
+     experiment_with_blocklist_size(size_vector);
+ }
+ 
+@@ -74,7 +72,7 @@ fn experiment_with_blocklist_size(sizes: Vec<i32>) {
+         let usync_timer = Instant::now();
+         let (usync_proof, usync_status) =
+             scheme.synchronize(&pp, &pk_id, &pk_sp, &blocklist, &ban_over_signatures, &honest_cred, None, None).unwrap();
+-        let time_data = format!("{}, {:.2?} \n", blocklist.len(), usync_timer.elapsed().as_secs_f32());
++        let time_data = format!("{}, {:.3?} \n", blocklist.len(), usync_timer.elapsed().as_secs_f32());
+         usync_timer_file.write(time_data.as_bytes()).expect("failed to write to the file");
+ 
+         let mut encoder = ZlibEncoder::new(Vec::new(), Compression::default());
+@@ -96,7 +94,7 @@ fn experiment_with_blocklist_size(sizes: Vec<i32>) {
+         let auth_proof =
+             scheme.authorize_token(&pp, &honest_user_token, &honest_cred, public_keys, usync_proof, usync_status).unwrap();
+         let mut auth_timer_file = OpenOptions::new().append(true).create(true).open(AUTH_TIMER_FILE).expect("cannot open the file");
+-        let auth_time_data = format!("{}, {:.2?} \n", len, auth_timer.elapsed().as_secs_f32());
++        let auth_time_data = format!("{}, {:.3?} \n", len, auth_timer.elapsed().as_secs_f32());
+         auth_timer_file.write(auth_time_data.as_bytes()).expect("failed to write to the file");
+ 
+         let mut auth_size_file = OpenOptions::new().append(true).create(true).open(AUTH_SIZE_FILE).expect("cannot open the file");
+@@ -115,7 +113,7 @@ fn experiment_with_blocklist_size(sizes: Vec<i32>) {
+         let ver_timer = Instant::now();
+         let result = scheme.verify_auth_proof(&honest_user_token, &honest_user_msg, digest, &pk_id, &pk_sp, (&vk_r, &vk_zksnark), &auth_proof);
+         assert!(result.is_ok());
+-        let ver_time_data = format!("{}, {:.2?} \n", len, ver_timer.elapsed().as_secs_f32());
++        let ver_time_data = format!("{}, {:.3?} \n", len, ver_timer.elapsed().as_secs_f32());
+         ver_timer_file.write(ver_time_data.as_bytes()).expect("failed to write to the file");
+     }
+ }

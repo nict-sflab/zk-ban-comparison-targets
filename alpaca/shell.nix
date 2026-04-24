@@ -2,7 +2,6 @@
 pkgs.mkShell {
   packages = with pkgs; [ rustc cargo gcc cvc4 zsh ];
   NIX_ENFORCE_PURITY = "0";
-  CARGO_TARGET_DIR = "/tmp/alpaca-cargo-target";
   shellHook = ''
     git clone https://github.com/jiwonkimpark/alpaca
     git clone https://github.com/jiwonkimpark/circ-alpaca alpaca/circ-alpaca

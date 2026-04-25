@@ -18,7 +18,7 @@ index dab98f3..ad8ce30 100644
          let (usync_proof, usync_status) =
              scheme.synchronize(&pp, &pk_id, &pk_sp, &blocklist, &ban_over_signatures, &honest_cred, None, None).unwrap();
 -        let time_data = format!("{}, {:.2?} \n", blocklist.len(), usync_timer.elapsed().as_secs_f32());
-+        let time_data = format!("{}, {:.3?} \n", blocklist.len(), usync_timer.elapsed().as_secs_f32());
++        let time_data = format!("{}, {:.4?} \n", blocklist.len(), usync_timer.elapsed().as_secs_f32());
          usync_timer_file.write(time_data.as_bytes()).expect("failed to write to the file");
  
          let mut encoder = ZlibEncoder::new(Vec::new(), Compression::default());
@@ -27,7 +27,7 @@ index dab98f3..ad8ce30 100644
              scheme.authorize_token(&pp, &honest_user_token, &honest_cred, public_keys, usync_proof, usync_status).unwrap();
          let mut auth_timer_file = OpenOptions::new().append(true).create(true).open(AUTH_TIMER_FILE).expect("cannot open the file");
 -        let auth_time_data = format!("{}, {:.2?} \n", len, auth_timer.elapsed().as_secs_f32());
-+        let auth_time_data = format!("{}, {:.3?} \n", len, auth_timer.elapsed().as_secs_f32());
++        let auth_time_data = format!("{}, {:.4?} \n", len, auth_timer.elapsed().as_secs_f32());
          auth_timer_file.write(auth_time_data.as_bytes()).expect("failed to write to the file");
  
          let mut auth_size_file = OpenOptions::new().append(true).create(true).open(AUTH_SIZE_FILE).expect("cannot open the file");
@@ -36,7 +36,7 @@ index dab98f3..ad8ce30 100644
          let result = scheme.verify_auth_proof(&honest_user_token, &honest_user_msg, digest, &pk_id, &pk_sp, (&vk_r, &vk_zksnark), &auth_proof);
          assert!(result.is_ok());
 -        let ver_time_data = format!("{}, {:.2?} \n", len, ver_timer.elapsed().as_secs_f32());
-+        let ver_time_data = format!("{}, {:.3?} \n", len, ver_timer.elapsed().as_secs_f32());
++        let ver_time_data = format!("{}, {:.4?} \n", len, ver_timer.elapsed().as_secs_f32());
          ver_timer_file.write(ver_time_data.as_bytes()).expect("failed to write to the file");
      }
  }

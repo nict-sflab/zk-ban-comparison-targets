@@ -5,14 +5,14 @@ remote: Enumerating objects: 57, done.
 remote: Counting objects: 100% (57/57), done.
 remote: Compressing objects: 100% (50/50), done.
 remote: Total 57 (delta 4), reused 46 (delta 0), pack-reused 0 (from 0)
-Receiving objects: 100% (57/57), 101.30 KiB | 400.00 KiB/s, done.
+Receiving objects: 100% (57/57), 101.30 KiB | 7.24 MiB/s, done.
 Resolving deltas: 100% (4/4), done.
 Cloning into 'alpaca/circ-alpaca'...
 remote: Enumerating objects: 5994, done.
 remote: Counting objects: 100% (1824/1824), done.
 remote: Compressing objects: 100% (654/654), done.
 remote: Total 5994 (delta 1371), reused 1237 (delta 1168), pack-reused 4170 (from 2)
-Receiving objects: 100% (5994/5994), 4.69 MiB | 28.09 MiB/s, done.
+Receiving objects: 100% (5994/5994), 4.69 MiB | 29.65 MiB/s, done.
 Resolving deltas: 100% (3396/3396), done.
    Compiling libc v0.2.148
    Compiling proc-macro2 v1.0.86
@@ -24,138 +24,138 @@ Resolving deltas: 100% (3396/3396), done.
    Compiling syn v1.0.109
    Compiling tap v1.0.1
    Compiling memchr v2.6.3
-   Compiling serde v1.0.203
-   Compiling subtle v2.5.0
    Compiling funty v2.0.0
    Compiling thiserror v1.0.48
-   Compiling either v1.9.0
+   Compiling serde v1.0.203
+   Compiling subtle v2.5.0
    Compiling typenum v1.17.0
-   Compiling byteorder v1.4.3
+   Compiling either v1.9.0
    Compiling rustix v0.38.13
-   Compiling scopeguard v1.2.0
-   Compiling zerocopy v0.7.34
-   Compiling linux-raw-sys v0.4.7
+   Compiling byteorder v1.4.3
    Compiling bitflags v2.4.0
+   Compiling linux-raw-sys v0.4.7
    Compiling gmp-mpfr-sys v1.4.13
    Compiling once_cell v1.18.0
+   Compiling scopeguard v1.2.0
+   Compiling zerocopy v0.7.34
+   Compiling crossbeam-utils v0.8.16
    Compiling home v0.5.9
    Compiling allocator-api2 v0.2.18
-   Compiling crossbeam-utils v0.8.16
-   Compiling ppv-lite86 v0.2.17
    Compiling semver v1.0.23
+   Compiling ppv-lite86 v0.2.17
+   Compiling ucd-trie v0.1.6
+   Compiling adler v1.0.2
    Compiling spin v0.5.2
    Compiling az v1.2.1
-   Compiling ucd-trie v0.1.6
    Compiling wyz v0.5.1
-   Compiling adler v1.0.2
-   Compiling lazy_static v1.4.0
+   Compiling miniz_oxide v0.7.1
    Compiling log v0.4.20
    Compiling utf8parse v0.2.1
+   Compiling lazy_static v1.4.0
    Compiling rug v1.18.0
-   Compiling rayon-core v1.11.0
-   Compiling miniz_oxide v0.7.1
+   Compiling anstyle-query v1.0.0
+   Compiling arrayref v0.3.7
    Compiling anstyle-parse v0.2.1
-   Compiling anstyle v1.0.3
    Compiling constant_time_eq v0.3.0
-   Compiling gimli v0.28.0
+   Compiling anstyle v1.0.3
+   Compiling colorchoice v1.0.0
+   Compiling rustversion v1.0.17
    Compiling ahash v0.8.11
    Compiling generic-array v0.14.7
-   Compiling rustversion v1.0.17
    Compiling arrayvec v0.7.4
-   Compiling anstyle-query v1.0.0
-   Compiling colorchoice v1.0.0
-   Compiling crc32fast v1.3.2
    Compiling num-traits v0.2.16
    Compiling num-integer v0.1.45
    Compiling num-bigint v0.3.3
    Compiling memoffset v0.9.0
    Compiling crossbeam-epoch v0.9.15
    Compiling lock_api v0.4.12
-   Compiling arrayref v0.3.7
-   Compiling error-chain v0.12.4
+   Compiling crc32fast v1.3.2
+   Compiling rayon-core v1.11.0
+   Compiling gimli v0.28.0
    Compiling anstream v0.5.0
-   Compiling keccak v0.1.4
+   Compiling error-chain v0.12.4
+   Compiling strsim v0.10.0
+   Compiling heck v0.4.1
+   Compiling blake2b_simd v1.0.2
+   Compiling static_assertions v1.1.0
+   Compiling virtue v0.0.13
    Compiling regex-syntax v0.7.5
-   Compiling rustc-demangle v0.1.23
    Compiling clap_lex v0.5.1
+   Compiling flint-sys v0.7.3
    Compiling bitvec v1.0.1
    Compiling rustc_version v0.4.0
-   Compiling blake2b_simd v1.0.2
-   Compiling strsim v0.10.0
+   Compiling keccak v0.1.4
    Compiling aho-corasick v1.1.0
    Compiling object v0.32.1
-   Compiling virtue v0.0.13
-   Compiling heck v0.4.1
    Compiling hashbrown v0.14.0
+   Compiling spin v0.9.8
    Compiling crossbeam-channel v0.5.8
+   Compiling paste v1.0.14
+   Compiling rustc-demangle v0.1.23
    Compiling curve25519-dalek v4.1.3
    Compiling quote v1.0.36
-   Compiling spin v0.9.8
-   Compiling static_assertions v1.1.0
-   Compiling paste v1.0.14
-   Compiling flint-sys v0.7.3
    Compiling clap_builder v4.4.4
-   Compiling syn v2.0.68
    Compiling crossbeam-deque v0.8.3
-   Compiling bitmaps v2.1.0
-   Compiling bincode_derive v2.0.0-rc.3
+   Compiling syn v2.0.68
    Compiling im v15.1.0
+   Compiling bincode_derive v2.0.0-rc.3
    Compiling fxhash v0.2.1
    Compiling itertools v0.10.5
-   Compiling regex-syntax v0.6.29
-   Compiling equivalent v1.0.1
-   Compiling serde_json v1.0.107
-   Compiling cpufeatures v0.2.9
-   Compiling void v1.0.2
-   Compiling fnv v1.0.7
-   Compiling std-shims v0.1.1
+   Compiling bitmaps v2.1.0
    Compiling beef v0.5.2
-   Compiling cc v1.0.83
-   Compiling lru v0.12.3
-   Compiling indexmap v2.0.0
+   Compiling void v1.0.2
+   Compiling equivalent v1.0.1
+   Compiling cpufeatures v0.2.9
+   Compiling fnv v1.0.7
+   Compiling serde_json v1.0.107
+   Compiling regex-syntax v0.6.29
    Compiling flate2 v1.0.27
-   Compiling getrandom v0.2.10
-   Compiling rand_core v0.6.4
-   Compiling block-buffer v0.10.4
-   Compiling crypto-common v0.1.6
-   Compiling num_cpus v1.16.0
-   Compiling sized-chunks v0.6.5
-   Compiling atty v0.2.14
-   Compiling rand_chacha v0.3.1
-   Compiling digest v0.10.7
-   Compiling regex-automata v0.3.8
-   Compiling rand_xoshiro v0.6.0
+   Compiling std-shims v0.1.1
+   Compiling indexmap v2.0.0
+   Compiling lru v0.12.3
    Compiling fixedbitset v0.4.2
    Compiling itoa v1.0.9
+   Compiling ryu v1.0.15
    Compiling humantime v2.1.0
    Compiling termcolor v1.3.0
-   Compiling ryu v1.0.15
-   Compiling which v4.4.2
-   Compiling rand v0.8.5
-   Compiling sha3 v0.10.8
-   Compiling petgraph v0.6.4
+   Compiling cc v1.0.83
    Compiling circ_hc v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_hc)
+   Compiling crypto-common v0.1.6
+   Compiling getrandom v0.2.10
+   Compiling num_cpus v1.16.0
+   Compiling block-buffer v0.10.4
+   Compiling atty v0.2.14
+   Compiling rand_core v0.6.4
+   Compiling digest v0.10.7
+   Compiling sized-chunks v0.6.5
    Compiling circ_waksman v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_waksman)
+   Compiling rand_chacha v0.3.1
+   Compiling regex-automata v0.3.8
+   Compiling rand_xoshiro v0.6.0
+   Compiling petgraph v0.6.4
+   Compiling sha3 v0.10.8
    Compiling typed-arena v2.0.2
    Compiling ieee754 v0.2.6
+   Compiling approx v0.5.1
+   Compiling rand v0.8.5
+   Compiling which v4.4.2
+   Compiling rayon v1.7.0
    Compiling semolina v0.1.4
    Compiling sppark v0.1.8
    Compiling backtrace v0.3.69
    Compiling pasta-msm v0.1.4
-   Compiling approx v0.5.1
-   Compiling rayon v1.7.0
-   Compiling addr2line v0.21.0
    Compiling addchain v0.2.0
+   Compiling addr2line v0.21.0
    Compiling ff v0.13.0
    Compiling group v0.13.0
    Compiling pasta_curves v0.5.1
+   Compiling rsmt2 v0.14.1
    Compiling ff_derive v0.12.1
    Compiling datasize_derive v0.2.15
-   Compiling ff-derive-num v0.2.0
    Compiling logos-derive v0.12.1
+   Compiling ff-derive-num v0.2.0
    Compiling quickcheck_macros v1.0.0
    Compiling regex v1.9.5
-   Compiling rsmt2 v0.14.1
    Compiling serde_derive v1.0.203
    Compiling thiserror-impl v1.0.48
    Compiling zeroize_derive v1.4.2
@@ -163,13 +163,13 @@ Resolving deltas: 100% (3396/3396), done.
    Compiling curve25519-dalek-derive v0.1.1
    Compiling pest-ast v0.3.4
    Compiling env_logger v0.8.4
-   Compiling zeroize v1.8.1
-   Compiling quickcheck v1.0.3
    Compiling ff v0.12.1
+   Compiling zeroize v1.8.1
+   Compiling group v0.12.1
    Compiling merlin v3.0.0
    Compiling multiexp v0.4.0
-   Compiling group v0.12.1
    Compiling pairing v0.22.0
+   Compiling quickcheck v1.0.3
    Compiling bls12_381 v0.7.1
    Compiling pest v2.7.3
    Compiling logos v0.12.1
@@ -196,6 +196,9 @@ help: use `'_` for type paths
    |                                           +++
 
    Compiling zokrates_pest_ast v0.2.3 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/third_party/ZoKrates/zokrates_pest_ast)
+   Compiling bincode v2.0.0-rc.3
+   Compiling datasize v0.2.15
+   Compiling hex v0.4.3
 warning: hiding a lifetime that's elided elsewhere is confusing
     --> third_party/ZoKrates/zokrates_pest_ast/src/lib.rs:1110:28
      |
@@ -211,15 +214,12 @@ help: use `'_` for type paths
 1110 | pub fn generate_ast(input: &str) -> Result<ast::File<'_>, Error> {
      |                                                     ++++
 
-   Compiling datasize v0.2.15
-   Compiling hex v0.4.3
-   Compiling bincode v2.0.0-rc.3
    Compiling spartan v0.8.0 (https://github.com/jiwonkimpark/Spartan-pasta?branch=pasta#bb0688ef)
-warning: `zokrates_parser` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_parser` to apply 1 suggestion)
-warning: `zokrates_pest_ast` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_pest_ast` to apply 1 suggestion)
    Compiling rug-fft v0.1.2
    Compiling circ_fields v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_fields)
    Compiling rug-polynomial v0.2.5
+warning: `zokrates_parser` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_parser` to apply 1 suggestion)
+warning: `zokrates_pest_ast` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_pest_ast` to apply 1 suggestion)
    Compiling circ v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca)
 warning: unused import: `trace`
  --> src/target/r1cs/mod.rs:5:18
@@ -591,7 +591,7 @@ warning: unused imports: `Instance`, `NIZKGens`, and `NIZK`
    |                  ^^^^^^^^  ^^^^  ^^^^^^^^
 
 warning: `circ` (example "zk") generated 4 warnings (run `cargo fix --example "zk"` to apply 4 suggestions)
-    Finished `release` profile [optimized + debuginfo] target(s) in 36.47s
+    Finished `release` profile [optimized + debuginfo] target(s) in 35.02s
 warning: hiding a lifetime that's elided elsewhere is confusing
   --> third_party/ZoKrates/zokrates_parser/src/lib.rs:15:21
    |
@@ -968,7 +968,7 @@ warning: missing documentation for a function
 
 warning: `circ` (lib) generated 46 warnings (run `cargo fix --lib -p circ` to apply 12 suggestions)
    Compiling circ v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca)
-    Finished `release` profile [optimized + debuginfo] target(s) in 2.56s
+    Finished `release` profile [optimized + debuginfo] target(s) in 2.53s
 
 [nix-shell:~/Documents/zk-ban-comparison-targets/alpaca/alpaca]$ cargo run --release --example example
    Compiling proc-macro2 v1.0.79
@@ -983,135 +983,135 @@ warning: `circ` (lib) generated 46 warnings (run `cargo fix --lib -p circ` to ap
    Compiling serde v1.0.203
    Compiling byteorder v1.5.0
    Compiling tap v1.0.1
-   Compiling thiserror v1.0.58
    Compiling subtle v2.5.0
    Compiling funty v2.0.0
+   Compiling thiserror v1.0.58
    Compiling ppv-lite86 v0.2.17
    Compiling typenum v1.17.0
    Compiling scopeguard v1.2.0
    Compiling either v1.10.0
    Compiling rustix v0.38.32
-   Compiling constant_time_eq v0.3.0
-   Compiling arrayvec v0.7.4
-   Compiling once_cell v1.19.0
    Compiling arrayref v0.3.7
+   Compiling constant_time_eq v0.3.0
    Compiling bitflags v2.5.0
-   Compiling rand_core v0.6.4
+   Compiling once_cell v1.19.0
    Compiling linux-raw-sys v0.4.13
+   Compiling arrayvec v0.7.4
+   Compiling rand_core v0.6.4
+   Compiling crossbeam-utils v0.8.19
+   Compiling home v0.5.9
    Compiling zerocopy v0.7.35
    Compiling gmp-mpfr-sys v1.4.13
-   Compiling home v0.5.9
-   Compiling crossbeam-utils v0.8.19
    Compiling allocator-api2 v0.2.18
    Compiling memchr v2.7.2
    Compiling wyz v0.5.1
-   Compiling ec-gpu v0.2.0
+   Compiling semver v1.0.22
    Compiling rand_xorshift v0.3.0
    Compiling rand v0.8.5
-   Compiling semver v1.0.22
-   Compiling rayon-core v1.12.1
-   Compiling az v1.2.1
+   Compiling ec-gpu v0.2.0
    Compiling ucd-trie v0.1.6
    Compiling blake2b_simd v1.0.2
+   Compiling az v1.2.1
    Compiling static_assertions v1.1.0
-   Compiling paste v1.0.14
+   Compiling rayon-core v1.12.1
+   Compiling utf8parse v0.2.2
+   Compiling rug v1.18.0
+   Compiling log v0.4.21
    Compiling ahash v0.8.11
    Compiling generic-array v0.14.7
-   Compiling utf8parse v0.2.2
-   Compiling spin v0.9.8
-   Compiling rug v1.18.0
    Compiling num-traits v0.2.18
    Compiling num-bigint v0.3.3
    Compiling lock_api v0.4.12
-   Compiling log v0.4.21
-   Compiling lazy_static v1.5.0
+   Compiling paste v1.0.14
+   Compiling spin v0.9.8
    Compiling anstyle-parse v0.2.4
-   Compiling gimli v0.28.1
-   Compiling byte-slice-cast v1.2.2
-   Compiling bitvec v1.0.1
-   Compiling colorchoice v1.0.1
-   Compiling anstyle v1.0.7
-   Compiling rustversion v1.0.17
-   Compiling keccak v0.1.5
-   Compiling adler v1.0.2
-   Compiling rustc_version v0.4.0
    Compiling is_terminal_polyfill v1.70.0
-   Compiling quote v1.0.35
-   Compiling hashbrown v0.14.5
+   Compiling byte-slice-cast v1.2.2
+   Compiling rustversion v1.0.17
+   Compiling anstyle v1.0.7
+   Compiling lazy_static v1.5.0
+   Compiling colorchoice v1.0.1
+   Compiling keccak v0.1.5
+   Compiling bitvec v1.0.1
+   Compiling rustc_version v0.4.0
+   Compiling adler v1.0.2
    Compiling anstyle-query v1.1.0
+   Compiling hashbrown v0.14.5
+   Compiling gimli v0.28.1
+   Compiling anstream v0.6.14
    Compiling object v0.32.2
    Compiling miniz_oxide v0.7.2
-   Compiling anstream v0.6.14
-   Compiling crossbeam-epoch v0.9.18
    Compiling num-bigint v0.4.4
-   Compiling syn v2.0.58
+   Compiling quote v1.0.35
+   Compiling crossbeam-epoch v0.9.18
    Compiling curve25519-dalek v4.1.3
    Compiling error-chain v0.12.4
-   Compiling getrandom v0.2.14
    Compiling num_cpus v1.16.0
    Compiling blake2s_simd v1.0.2
-   Compiling flint-sys v0.7.3
-   Compiling crossbeam-deque v0.8.5
-   Compiling threadpool v1.8.1
    Compiling adler2 v2.0.0
-   Compiling strsim v0.11.1
-   Compiling rand_chacha v0.3.1
+   Compiling syn v2.0.58
+   Compiling getrandom v0.2.14
+   Compiling threadpool v1.8.1
+   Compiling heck v0.5.0
+   Compiling crossbeam-deque v0.8.5
    Compiling clap_lex v0.7.1
    Compiling rustc-demangle v0.1.23
+   Compiling virtue v0.0.13
+   Compiling flint-sys v0.7.3
+   Compiling strsim v0.11.1
+   Compiling rand_chacha v0.3.1
    Compiling blst v0.3.11
    Compiling semolina v0.1.4
    Compiling backtrace v0.3.71
-   Compiling heck v0.5.0
-   Compiling virtue v0.0.13
    Compiling clap_builder v4.5.7
+   Compiling bitmaps v2.1.0
    Compiling std-shims v0.1.1
    Compiling num-integer v0.1.46
-   Compiling bitmaps v2.1.0
    Compiling miniz_oxide v0.8.0
    Compiling im v15.1.0
    Compiling fxhash v0.2.1
-   Compiling rayon v1.10.0
+   Compiling bincode_derive v2.0.0-rc.3
    Compiling itertools v0.10.5
    Compiling crc32fast v1.4.2
-   Compiling bincode_derive v2.0.0-rc.3
-   Compiling crypto-common v0.1.6
-   Compiling which v4.4.2
-   Compiling block-buffer v0.10.4
-   Compiling digest v0.10.7
-   Compiling serde_json v1.0.117
-   Compiling cpufeatures v0.2.12
-   Compiling equivalent v1.0.1
-   Compiling halo2curves v0.6.1
-   Compiling beef v0.5.2
-   Compiling sppark v0.1.6
-   Compiling pasta-msm v0.1.4
-   Compiling sha3 v0.10.8
-   Compiling fnv v1.0.7
+   Compiling rayon v1.10.0
    Compiling void v1.0.2
    Compiling regex-syntax v0.6.29
-   Compiling indexmap v2.2.6
+   Compiling cpufeatures v0.2.12
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling which v4.4.2
+   Compiling digest v0.10.7
+   Compiling beef v0.5.2
+   Compiling serde_json v1.0.117
+   Compiling fnv v1.0.7
+   Compiling sha3 v0.10.8
+   Compiling halo2curves v0.6.1
+   Compiling equivalent v1.0.1
    Compiling sized-chunks v0.6.5
    Compiling flate2 v1.0.34
+   Compiling indexmap v2.2.6
    Compiling lru v0.12.4
+   Compiling sppark v0.1.6
+   Compiling pasta-msm v0.1.4
    Compiling rand_xoshiro v0.6.0
-   Compiling itoa v1.0.11
    Compiling fixedbitset v0.4.2
-   Compiling ff v0.13.0
    Compiling ryu v1.0.18
+   Compiling ff v0.13.0
+   Compiling itoa v1.0.11
    Compiling circ_hc v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_hc)
    Compiling group v0.13.0
    Compiling circ_waksman v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_waksman)
    Compiling generic-array v1.0.0
-   Compiling pairing v0.23.0
-   Compiling addchain v0.2.0
    Compiling itertools v0.12.1
-   Compiling ieee754 v0.2.6
    Compiling typed-arena v2.0.2
-   Compiling addr2line v0.21.0
+   Compiling pairing v0.23.0
+   Compiling ieee754 v0.2.6
+   Compiling addchain v0.2.0
    Compiling petgraph v0.6.5
+   Compiling addr2line v0.21.0
    Compiling ff_derive v0.13.0
-   Compiling datasize_derive v0.2.15
    Compiling ff_derive v0.12.1
+   Compiling datasize_derive v0.2.15
    Compiling ff-derive-num v0.2.0
    Compiling trait-set v0.3.0
    Compiling logos-derive v0.12.1
@@ -1121,13 +1121,13 @@ warning: `circ` (lib) generated 46 warnings (run `cargo fix --lib -p circ` to ap
    Compiling clap_derive v4.5.5
    Compiling curve25519-dalek-derive v0.1.1
    Compiling pest-ast v0.3.4
-   Compiling zeroize v1.8.1
-   Compiling rsmt2 v0.14.1
-   Compiling merlin v3.0.0
    Compiling ff v0.12.1
+   Compiling logos v0.12.1
+   Compiling rsmt2 v0.14.1
+   Compiling zeroize v1.8.1
+   Compiling merlin v3.0.0
    Compiling multiexp v0.4.0
    Compiling pest v2.7.10
-   Compiling logos v0.12.1
    Compiling clap v4.5.7
    Compiling circ_opt v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_opt)
    Compiling pest_meta v2.7.10
@@ -1179,10 +1179,10 @@ help: use `'_` for type paths
    Compiling spartan v0.8.0 (https://github.com/jiwonkimpark/Spartan-pasta?branch=pasta#bb0688ef)
    Compiling nova-snark v0.37.0
 warning: `zokrates_parser` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_parser` to apply 1 suggestion)
-warning: `zokrates_pest_ast` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_pest_ast` to apply 1 suggestion)
    Compiling rug-fft v0.1.2
    Compiling circ_fields v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/circ_fields)
    Compiling rug-polynomial v0.2.5
+warning: `zokrates_pest_ast` (lib) generated 1 warning (run `cargo fix --lib -p zokrates_pest_ast` to apply 1 suggestion)
    Compiling circ v0.1.0 (/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca)
 warning: unused import: `trace`
  --> circ-alpaca/src/target/r1cs/mod.rs:5:18
@@ -1827,7 +1827,7 @@ warning: variable does not need to be mutable
    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
 
 warning: `alpaca` (example "example") generated 4 warnings (run `cargo fix --example "example"` to apply 1 suggestion)
-    Finished `release` profile [optimized + debuginfo] target(s) in 45.97s
+    Finished `release` profile [optimized + debuginfo] target(s) in 46.35s
      Running `target/release/examples/example`
 +/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:5> disable -r time
 +/home/akama/Documents/zk-ban-comparison-targets/alpaca/alpaca/circ-alpaca/alpaca/relations/preprocess.zsh:7> MODE=release
@@ -1856,22 +1856,35 @@ Final R1cs size: 16287
 
 Set up complete
 Initialized blocklist
-spartan::r1cs_to_spartan: 63.52ms
-1. append protocol name to transcript: 80.00ns
-2. append message to transcript: 114.43ms
-3. padding variables: 56.46µs
-timer_commit: 18.02ms
-timer_sc_proof_phase1: 51.93ms
-knowledge proof: 223.98µs
-product proof: 678.05µs
-equality proof: 357.41µs
-timer_sc_proof_phase2: 52.11ms
-poly eval proof: 26.58ms
-equality proof: 352.58µs
-4. R1CS proof: 150.28ms
-5. encoding proof: 26.36µs
-NIZK::prove: 264.82ms
+spartan::r1cs_to_spartan: 64.52ms
+1. append protocol name to transcript: 85.00ns
+2. append message to transcript: 114.23ms
+3. padding variables: 50.98µs
+timer_commit: 18.75ms
+timer_sc_proof_phase1: 52.58ms
+knowledge proof: 226.15µs
+product proof: 671.16µs
+equality proof: 355.81µs
+timer_sc_proof_phase2: 51.73ms
+poly eval proof: 26.68ms
+equality proof: 362.18µs
+4. R1CS proof: 151.38ms
+5. encoding proof: 26.17µs
+NIZK::prove: 265.71ms
 Verifying with Spartan
 Proof Verification Successful!
 
-[nix-shell:~/Documents/zk-ban-comparison-targets/alpaca/alpaca]$
+[nix-shell:~/Documents/zk-ban-comparison-targets/alpaca/alpaca]$ sh
+circ-alpaca/ examples/    .git/        .github/     src/         target/
+
+[nix-shell:~/Documents/zk-ban-comparison-targets/alpaca/alpaca]$ cd ..
+
+[nix-shell:~/Documents/zk-ban-comparison-targets/alpaca]$ sh
+alpaca/           check_storage.sh
+
+[nix-shell:~/Documents/zk-ban-comparison-targets/alpaca]$ sh check_storage.sh
+Checking prover storage files in ALPACA: ./alpaca
+-rw-r--r-- 1 akama users 318M Apr 25 19:15 ./alpaca/IVC_P
+-rw-r--r-- 1 akama users 161M Apr 25 19:15 ./alpaca/P
+
+[nix-shell:~/Documents/zk-ban-comparison-targets/alpaca]$

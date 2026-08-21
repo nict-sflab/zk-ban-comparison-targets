@@ -7,6 +7,8 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
+	"strings"
 	"testing"
 
 	abr "github.com/akakou/zk-ban-comparisons/abration"
@@ -20,16 +22,29 @@ import (
 	"github.com/consensys/gnark/frontend/cs/r1cs"
 )
 
-const (
-	benchRevocations = 30000
-	benchT           = 30
+var (
+	classicBenchRevocationCounts = []int{
+		2569, 794, 30000,
+	}
+	zkBanBenchCircuitSizes = []zkbanwitness.RevocationListSize{
+		{3697, 113, 99, 68, 48, 6, 4, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		zkbantest.EmptyUniformRevocationList(30, 30000).Sizes(),
+	}
 )
 
 var benchSecret = zkbanwitness.InitBigInt()
 
 func BenchmarkClassic(b *testing.B) {
+	for _, revocationCount := range classicBenchRevocationCounts {
+		b.Run(fmt.Sprintf("revocations=%d", revocationCount), func(b *testing.B) {
+			benchmarkClassic(b, revocationCount)
+		})
+	}
+}
+
+func benchmarkClassic(b *testing.B, revocationCount int) {
 	fmt.Println("ready...")
-	template, assignment := classicCircuitsForBench(b)
+	template, assignment := classicCircuitsForBench(b, revocationCount)
 	dumps := dumpBenchArtifacts(b, template)
 
 	fmt.Println("start...")
@@ -49,8 +64,16 @@ func BenchmarkClassic(b *testing.B) {
 }
 
 func BenchmarkZKBan(b *testing.B) {
+	for _, circuitSizes := range zkBanBenchCircuitSizes {
+		b.Run(zkBanBenchmarkName(circuitSizes), func(b *testing.B) {
+			benchmarkZKBan(b, circuitSizes)
+		})
+	}
+}
+
+func benchmarkZKBan(b *testing.B, circuitSizes zkbanwitness.RevocationListSize) {
 	fmt.Println("ready...")
-	template, assignment := zkbanCircuitsForBench()
+	template, assignment := zkbanCircuitsForBench(circuitSizes)
 	dumps := dumpBenchArtifacts(b, template)
 
 	fmt.Println("start...")
@@ -69,26 +92,23 @@ func BenchmarkZKBan(b *testing.B) {
 	}
 }
 
-func classicCircuitsForBench(b *testing.B) (frontend.Circuit, frontend.Circuit) {
-	b.Helper()
+func classicCircuitsForBench(tb testing.TB, revocationCount int) (frontend.Circuit, frontend.Circuit) {
+	tb.Helper()
+	zkbanwitness.InitBigInt = zkbantest.InitBigInt
 
 	template := &abr.ClassicCircuit{
-		Entries: make([]abr.ClassicRevocationEntry, benchRevocations),
+		Entries: make([]abr.ClassicRevocationEntry, revocationCount),
 	}
 
 	tagBase := zkbanwitness.InitBigInt()
 	tag := tagBase.Add(&tagBase.Int, big.NewInt(1))
 	entries := []abr.ClassicRevocationEntry{}
+	emptyNym := zkbantest.InitBigInt()
 
-	nym, err := zkbansnark.CommitHash(tag, &benchSecret.Int)
-	if err != nil {
-		b.Fatal(err)
-	}
-
-	for i := 0; i < benchRevocations; i++ {
+	for i := 0; i < revocationCount; i++ {
 		entry := abr.ClassicRevocationEntry{
 			Tag: *tag,
-			Nym: *nym,
+			Nym: emptyNym.Int,
 		}
 
 		entries = append(entries, entry)
@@ -101,8 +121,17 @@ func classicCircuitsForBench(b *testing.B) (frontend.Circuit, frontend.Circuit) 
 	return template, assignment
 }
 
-func zkbanCircuitsForBench() (frontend.Circuit, frontend.Circuit) {
-	revocationList := zkbantest.EmptyUniformRevocationList(benchT, benchRevocations)
+func zkBanBenchmarkName(circuitSizes zkbanwitness.RevocationListSize) string {
+	parts := make([]string, len(circuitSizes))
+	for i, size := range circuitSizes {
+		parts[i] = strconv.Itoa(size)
+	}
+	return "circuit_sizes=" + strings.Join(parts, ",")
+}
+
+func zkbanCircuitsForBench(circuitSizes zkbanwitness.RevocationListSize) (frontend.Circuit, frontend.Circuit) {
+	zkbanwitness.InitBigInt = zkbantest.InitBigInt
+	revocationList := zkbanwitness.EmptyRevocationList(circuitSizes)
 	templateAssigned := zkbancircuit.NewRevocationListAssigned(revocationList)
 	witnessAssigned := zkbancircuit.NewRevocationListAssigned(revocationList)
 

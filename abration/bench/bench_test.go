@@ -24,7 +24,7 @@ import (
 
 var (
 	classicBenchRevocationCounts = []int{
-		2569, 794, 30000,
+		2569, 796, 30000,
 	}
 	zkBanBenchCircuitSizes = []zkbanwitness.RevocationListSize{
 		{3697, 113, 99, 68, 48, 6, 4, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1},
